@@ -1,4 +1,4 @@
-name: PostgreSQL 13 Benchmark
+name: PostgreSQL 16 Benchmark
 
 on:
   push:
@@ -10,15 +10,16 @@ permissions:
 
 jobs:
   benchmark:
+    needs: [pg15]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PostgreSQL 13
+      - name: Setup PostgreSQL 16
         uses: tj-actions/install-postgresql@v3
         with:
-          postgresql-version: 13
+          postgresql-version: 16
 
       - name: Run PgBench
         run: |
@@ -26,14 +27,14 @@ jobs:
           sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
 
           # Create benchmark markdown file
-          cat << EOF > hugosite/content/benchmarkpg13.md
+          cat << EOF > hugosite/content/benchmarkpg16.md
           +++
           date = '$(date +%Y-%m-%dT%H:%M:%S%z)'
           draft = false
-          title = 'PostgreSQL 13 Benchmark Results'
+          title = 'PostgreSQL 16 Benchmark Results'
           +++
 
-          ## PgBench Results for PostgreSQL 13
+          ## PgBench Results for PostgreSQL 16
 
           ### System Information
           \`\`\`
@@ -47,13 +48,13 @@ jobs:
           # Initialize and run benchmark
           sudo -u postgres pgbench -i 
 
-          echo "### Benchmark Results" >> hugosite/content/benchmarkpg13.md
-          echo "\`\`\`" >> hugosite/content/benchmarkpg13.md
-          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/benchmarkpg13.md)
-          echo "\`\`\`" >> hugosite/content/benchmarkpg13.md
+          echo "### Benchmark Results" >> hugosite/content/benchmarkpg16.md
+          echo "\`\`\`" >> hugosite/content/benchmarkpg16.md
+          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/benchmarkpg16.md)
+          echo "\`\`\`" >> hugosite/content/benchmarkpg16.md
 
       - name: Commit benchmark results
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update PostgreSQL 13 benchmark results"
-          file_pattern: 'hugosite/content/benchmarkpg13.md'
+          commit_message: "Update PostgreSQL 16 benchmark results"
+          file_pattern: 'hugosite/content/benchmarkpg16.md'
