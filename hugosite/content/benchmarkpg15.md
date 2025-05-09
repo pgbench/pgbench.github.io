@@ -1,5 +1,5 @@
 +++
-date = '2025-05-09T23:01:39+0000'
+date = '2025-05-09T23:33:38+0000'
 draft = false
 title = 'PostgreSQL 15 Benchmark Results'
 +++
@@ -14,23 +14,22 @@ Thread(s) per core:                   2
 Memory: 15Gi
 ```
 
-### Initial Setup
 ### Benchmark Results
 ```
 pgbench (16.8 (Ubuntu 16.8-1.pgdg24.04+1))
 starting vacuum...end.
-progress: 5.0 s, 2742.8 tps, lat 5.816 ms stddev 5.161, 0 failed
-progress: 10.0 s, 2652.4 tps, lat 6.030 ms stddev 5.376, 0 failed
-progress: 15.0 s, 2682.8 tps, lat 5.962 ms stddev 5.556, 0 failed
-progress: 20.0 s, 2790.8 tps, lat 5.731 ms stddev 5.008, 0 failed
-progress: 25.0 s, 2743.2 tps, lat 5.834 ms stddev 5.429, 0 failed
-progress: 30.0 s, 2745.4 tps, lat 5.826 ms stddev 5.340, 0 failed
-progress: 35.0 s, 2723.2 tps, lat 5.877 ms stddev 5.130, 0 failed
-progress: 40.0 s, 2734.6 tps, lat 5.850 ms stddev 5.255, 0 failed
-progress: 45.0 s, 2784.2 tps, lat 5.743 ms stddev 5.276, 0 failed
-progress: 50.0 s, 2691.4 tps, lat 5.946 ms stddev 5.263, 0 failed
-progress: 55.0 s, 2739.8 tps, lat 5.836 ms stddev 4.949, 0 failed
-progress: 60.0 s, 2762.4 tps, lat 5.792 ms stddev 5.072, 0 failed
+progress: 5.0 s, 2392.4 tps, lat 6.660 ms stddev 5.972, 0 failed
+progress: 10.0 s, 2221.2 tps, lat 7.205 ms stddev 6.917, 0 failed
+progress: 15.0 s, 2238.2 tps, lat 7.149 ms stddev 6.668, 0 failed
+progress: 20.0 s, 2400.0 tps, lat 6.669 ms stddev 6.056, 0 failed
+progress: 25.0 s, 2386.8 tps, lat 6.701 ms stddev 5.769, 0 failed
+progress: 30.0 s, 2493.2 tps, lat 6.419 ms stddev 6.057, 0 failed
+progress: 35.0 s, 2522.8 tps, lat 6.339 ms stddev 5.837, 0 failed
+progress: 40.0 s, 2410.0 tps, lat 6.640 ms stddev 6.396, 0 failed
+progress: 45.0 s, 2494.4 tps, lat 6.411 ms stddev 5.974, 0 failed
+progress: 50.0 s, 2353.4 tps, lat 6.799 ms stddev 6.021, 0 failed
+progress: 55.0 s, 2360.8 tps, lat 6.778 ms stddev 6.291, 0 failed
+progress: 60.0 s, 2356.2 tps, lat 6.789 ms stddev 6.233, 0 failed
 transaction type: <builtin: TPC-B (sort of)>
 scaling factor: 1
 query mode: simple
@@ -38,10 +37,10 @@ number of clients: 16
 number of threads: 4
 maximum number of tries: 1
 duration: 60 s
-number of transactions actually processed: 163980
+number of transactions actually processed: 143162
 number of failed transactions: 0 (0.000%)
-latency average = 5.853 ms
-latency stddev = 5.237 ms
-initial connection time = 10.682 ms
-tps = 2732.833798 (without initial connection time)
+latency average = 6.704 ms
+latency stddev = 6.187 ms
+initial connection time = 10.941 ms
+tps = 2385.929943 (without initial connection time)
 ```
