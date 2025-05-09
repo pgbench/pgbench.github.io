@@ -55,8 +55,7 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
         run: |
-          # Set up the database
-          pgbench -c 1,2,4,8,16,32,64 -j 4 -T 60 -s 100 -U postgres postgres
+          pgbench -c 16 -j 4 -T 60 -s 100 -U postgres postgres
           cd hugosite
           hugo \
             --minify \
