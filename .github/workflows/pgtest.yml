@@ -71,17 +71,12 @@ jobs:
           echo "" >> hugosite/content/benchmarkpg17.md
 
           # Initialize and run benchmark, capture output
-          sudo -u postgres pgbench -i -s 100 -U postgres postgres 2>&1 | tee setup_output.txt
-          echo "### Initial Setup" >> hugosite/content/benchmarkpg17.md
-          echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
-          cat setup_output.txt >> hugosite/content/benchmarkpg17.md
-          echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
-          echo "" >> hugosite/content/benchmarkpg17.md
+          sudo -u postgres pgbench -i 
 
           # Run benchmark test and capture output
           echo "### Benchmark Results" >> hugosite/content/benchmarkpg17.md
           echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
-          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -r --aggregate-interval=5 -U postgres postgres 2>&1 | tee benchmark_output.txt
+          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee benchmark_output.txt
           cat benchmark_output.txt >> hugosite/content/benchmarkpg17.md
           echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
 
