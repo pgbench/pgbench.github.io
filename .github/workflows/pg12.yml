@@ -1,8 +1,8 @@
-name: PostgreSQL 13 Benchmark
+name: PostgreSQL 12 Benchmark
 
 on:
   workflow_run:
-    workflows: ["PostgreSQL 12 Benchmark"]
+    workflows: ["PostgreSQL 11 Benchmark"]
     types:
       - completed
   workflow_dispatch:
@@ -17,10 +17,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PostgreSQL 13
+      - name: Setup PostgreSQL 12
         uses: tj-actions/install-postgresql@v3
         with:
-          postgresql-version: 13
+          postgresql-version: 12
 
       - name: Run PgBench
         run: |
@@ -28,14 +28,14 @@ jobs:
           sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
 
           # Create benchmark markdown file
-          cat << EOF > hugosite/content/benchmarkpg13.md
+          cat << EOF > hugosite/content/benchmarkpg12.md
           +++
           date = '$(date +%Y-%m-%dT%H:%M:%S%z)'
           draft = false
-          title = 'PostgreSQL 13 Benchmark Results'
+          title = 'PostgreSQL 12 Benchmark Results'
           +++
 
-          ## PgBench Results for PostgreSQL 13
+          ## PgBench Results for PostgreSQL 12
 
           ### System Information
           \`\`\`
@@ -49,13 +49,13 @@ jobs:
           # Initialize and run benchmark
           sudo -u postgres pgbench -i 
 
-          echo "### Benchmark Results" >> hugosite/content/benchmarkpg13.md
-          echo "\`\`\`" >> hugosite/content/benchmarkpg13.md
-          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/benchmarkpg13.md)
-          echo "\`\`\`" >> hugosite/content/benchmarkpg13.md
+          echo "### Benchmark Results" >> hugosite/content/benchmarkpg12.md
+          echo "\`\`\`" >> hugosite/content/benchmarkpg12.md
+          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/benchmarkpg12.md)
+          echo "\`\`\`" >> hugosite/content/benchmarkpg12.md
 
       - name: Commit benchmark results
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update PostgreSQL 13 benchmark results"
-          file_pattern: 'hugosite/content/benchmarkpg13.md'
+          commit_message: "Update PostgreSQL 12 benchmark results"
+          file_pattern: 'hugosite/content/benchmarkpg12.md'
