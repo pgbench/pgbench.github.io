@@ -1,5 +1,5 @@
 +++
-date = '2025-05-09T22:43:22+0000'
+date = '2025-05-09T22:54:45+0000'
 draft = false
 title = 'PostgreSQL 13 Benchmark Results'
 +++
@@ -15,121 +15,33 @@ Memory: 15Gi
 ```
 
 ### Initial Setup
-dropping old tables...
-NOTICE:  table "pgbench_accounts" does not exist, skipping
-NOTICE:  table "pgbench_branches" does not exist, skipping
-NOTICE:  table "pgbench_history" does not exist, skipping
-NOTICE:  table "pgbench_tellers" does not exist, skipping
-creating tables...
-generating data (client-side)...
-100000 of 10000000 tuples (1%) done (elapsed 0.06 s, remaining 5.52 s)
-200000 of 10000000 tuples (2%) done (elapsed 0.14 s, remaining 7.06 s)
-300000 of 10000000 tuples (3%) done (elapsed 0.21 s, remaining 6.73 s)
-400000 of 10000000 tuples (4%) done (elapsed 0.31 s, remaining 7.42 s)
-500000 of 10000000 tuples (5%) done (elapsed 0.40 s, remaining 7.65 s)
-600000 of 10000000 tuples (6%) done (elapsed 0.47 s, remaining 7.43 s)
-700000 of 10000000 tuples (7%) done (elapsed 0.55 s, remaining 7.34 s)
-800000 of 10000000 tuples (8%) done (elapsed 0.65 s, remaining 7.52 s)
-900000 of 10000000 tuples (9%) done (elapsed 0.72 s, remaining 7.31 s)
-1000000 of 10000000 tuples (10%) done (elapsed 0.81 s, remaining 7.28 s)
-1100000 of 10000000 tuples (11%) done (elapsed 0.91 s, remaining 7.39 s)
-1200000 of 10000000 tuples (12%) done (elapsed 0.97 s, remaining 7.10 s)
-1300000 of 10000000 tuples (13%) done (elapsed 1.08 s, remaining 7.21 s)
-1400000 of 10000000 tuples (14%) done (elapsed 1.17 s, remaining 7.22 s)
-1500000 of 10000000 tuples (15%) done (elapsed 1.25 s, remaining 7.08 s)
-1600000 of 10000000 tuples (16%) done (elapsed 1.34 s, remaining 7.01 s)
-1700000 of 10000000 tuples (17%) done (elapsed 1.45 s, remaining 7.07 s)
-1800000 of 10000000 tuples (18%) done (elapsed 1.52 s, remaining 6.92 s)
-1900000 of 10000000 tuples (19%) done (elapsed 1.60 s, remaining 6.83 s)
-2000000 of 10000000 tuples (20%) done (elapsed 1.67 s, remaining 6.68 s)
-2100000 of 10000000 tuples (21%) done (elapsed 1.76 s, remaining 6.62 s)
-2200000 of 10000000 tuples (22%) done (elapsed 1.86 s, remaining 6.58 s)
-2300000 of 10000000 tuples (23%) done (elapsed 1.92 s, remaining 6.43 s)
-2400000 of 10000000 tuples (24%) done (elapsed 2.01 s, remaining 6.35 s)
-2500000 of 10000000 tuples (25%) done (elapsed 2.11 s, remaining 6.32 s)
-2600000 of 10000000 tuples (26%) done (elapsed 2.16 s, remaining 6.16 s)
-2700000 of 10000000 tuples (27%) done (elapsed 2.26 s, remaining 6.10 s)
-2800000 of 10000000 tuples (28%) done (elapsed 2.38 s, remaining 6.11 s)
-2900000 of 10000000 tuples (29%) done (elapsed 2.43 s, remaining 5.94 s)
-3000000 of 10000000 tuples (30%) done (elapsed 2.55 s, remaining 5.94 s)
-3100000 of 10000000 tuples (31%) done (elapsed 2.66 s, remaining 5.91 s)
-3200000 of 10000000 tuples (32%) done (elapsed 2.73 s, remaining 5.80 s)
-3300000 of 10000000 tuples (33%) done (elapsed 2.82 s, remaining 5.73 s)
-3400000 of 10000000 tuples (34%) done (elapsed 2.91 s, remaining 5.65 s)
-3500000 of 10000000 tuples (35%) done (elapsed 2.98 s, remaining 5.53 s)
-3600000 of 10000000 tuples (36%) done (elapsed 3.06 s, remaining 5.44 s)
-3700000 of 10000000 tuples (37%) done (elapsed 3.13 s, remaining 5.33 s)
-3800000 of 10000000 tuples (38%) done (elapsed 3.22 s, remaining 5.25 s)
-3900000 of 10000000 tuples (39%) done (elapsed 3.31 s, remaining 5.18 s)
-4000000 of 10000000 tuples (40%) done (elapsed 3.37 s, remaining 5.06 s)
-4100000 of 10000000 tuples (41%) done (elapsed 3.46 s, remaining 4.98 s)
-4200000 of 10000000 tuples (42%) done (elapsed 3.56 s, remaining 4.91 s)
-4300000 of 10000000 tuples (43%) done (elapsed 3.62 s, remaining 4.80 s)
-4400000 of 10000000 tuples (44%) done (elapsed 3.70 s, remaining 4.71 s)
-4500000 of 10000000 tuples (45%) done (elapsed 3.80 s, remaining 4.65 s)
-4600000 of 10000000 tuples (46%) done (elapsed 3.86 s, remaining 4.54 s)
-4700000 of 10000000 tuples (47%) done (elapsed 3.95 s, remaining 4.46 s)
-4800000 of 10000000 tuples (48%) done (elapsed 4.06 s, remaining 4.40 s)
-4900000 of 10000000 tuples (49%) done (elapsed 4.11 s, remaining 4.28 s)
-5000000 of 10000000 tuples (50%) done (elapsed 4.20 s, remaining 4.20 s)
-5100000 of 10000000 tuples (51%) done (elapsed 4.27 s, remaining 4.11 s)
-5200000 of 10000000 tuples (52%) done (elapsed 4.37 s, remaining 4.03 s)
-5300000 of 10000000 tuples (53%) done (elapsed 4.45 s, remaining 3.95 s)
-5400000 of 10000000 tuples (54%) done (elapsed 4.51 s, remaining 3.85 s)
-5500000 of 10000000 tuples (55%) done (elapsed 4.60 s, remaining 3.77 s)
-5600000 of 10000000 tuples (56%) done (elapsed 4.71 s, remaining 3.70 s)
-5700000 of 10000000 tuples (57%) done (elapsed 4.81 s, remaining 3.63 s)
-5800000 of 10000000 tuples (58%) done (elapsed 4.86 s, remaining 3.52 s)
-5900000 of 10000000 tuples (59%) done (elapsed 4.95 s, remaining 3.44 s)
-6000000 of 10000000 tuples (60%) done (elapsed 5.03 s, remaining 3.35 s)
-6100000 of 10000000 tuples (61%) done (elapsed 5.12 s, remaining 3.27 s)
-6200000 of 10000000 tuples (62%) done (elapsed 5.21 s, remaining 3.19 s)
-6300000 of 10000000 tuples (63%) done (elapsed 5.28 s, remaining 3.10 s)
-6400000 of 10000000 tuples (64%) done (elapsed 5.36 s, remaining 3.02 s)
-6500000 of 10000000 tuples (65%) done (elapsed 5.46 s, remaining 2.94 s)
-6600000 of 10000000 tuples (66%) done (elapsed 5.53 s, remaining 2.85 s)
-6700000 of 10000000 tuples (67%) done (elapsed 5.61 s, remaining 2.76 s)
-6800000 of 10000000 tuples (68%) done (elapsed 5.68 s, remaining 2.67 s)
-6900000 of 10000000 tuples (69%) done (elapsed 5.77 s, remaining 2.59 s)
-7000000 of 10000000 tuples (70%) done (elapsed 5.87 s, remaining 2.51 s)
-7100000 of 10000000 tuples (71%) done (elapsed 5.93 s, remaining 2.42 s)
-7200000 of 10000000 tuples (72%) done (elapsed 6.02 s, remaining 2.34 s)
-7300000 of 10000000 tuples (73%) done (elapsed 6.11 s, remaining 2.26 s)
-7400000 of 10000000 tuples (74%) done (elapsed 6.18 s, remaining 2.17 s)
-7500000 of 10000000 tuples (75%) done (elapsed 6.26 s, remaining 2.09 s)
-7600000 of 10000000 tuples (76%) done (elapsed 6.37 s, remaining 2.01 s)
-7700000 of 10000000 tuples (77%) done (elapsed 6.42 s, remaining 1.92 s)
-7800000 of 10000000 tuples (78%) done (elapsed 6.51 s, remaining 1.84 s)
-7900000 of 10000000 tuples (79%) done (elapsed 6.61 s, remaining 1.76 s)
-8000000 of 10000000 tuples (80%) done (elapsed 6.67 s, remaining 1.67 s)
-8100000 of 10000000 tuples (81%) done (elapsed 6.76 s, remaining 1.59 s)
-8200000 of 10000000 tuples (82%) done (elapsed 6.86 s, remaining 1.51 s)
-8300000 of 10000000 tuples (83%) done (elapsed 6.93 s, remaining 1.42 s)
-8400000 of 10000000 tuples (84%) done (elapsed 7.02 s, remaining 1.34 s)
-8500000 of 10000000 tuples (85%) done (elapsed 7.12 s, remaining 1.26 s)
-8600000 of 10000000 tuples (86%) done (elapsed 7.17 s, remaining 1.17 s)
-8700000 of 10000000 tuples (87%) done (elapsed 7.26 s, remaining 1.09 s)
-8800000 of 10000000 tuples (88%) done (elapsed 7.33 s, remaining 1.00 s)
-8900000 of 10000000 tuples (89%) done (elapsed 7.42 s, remaining 0.92 s)
-9000000 of 10000000 tuples (90%) done (elapsed 7.51 s, remaining 0.83 s)
-9100000 of 10000000 tuples (91%) done (elapsed 7.58 s, remaining 0.75 s)
-9200000 of 10000000 tuples (92%) done (elapsed 7.67 s, remaining 0.67 s)
-9300000 of 10000000 tuples (93%) done (elapsed 7.77 s, remaining 0.58 s)
-9400000 of 10000000 tuples (94%) done (elapsed 7.83 s, remaining 0.50 s)
-9500000 of 10000000 tuples (95%) done (elapsed 7.91 s, remaining 0.42 s)
-9600000 of 10000000 tuples (96%) done (elapsed 8.02 s, remaining 0.33 s)
-9700000 of 10000000 tuples (97%) done (elapsed 8.08 s, remaining 0.25 s)
-9800000 of 10000000 tuples (98%) done (elapsed 9.13 s, remaining 0.19 s)
-9900000 of 10000000 tuples (99%) done (elapsed 9.88 s, remaining 0.10 s)
-10000000 of 10000000 tuples (100%) done (elapsed 10.76 s, remaining 0.00 s)
-vacuuming...
-creating primary keys...
-done in 14.37 s (drop tables 0.05 s, create tables 0.28 s, client-side generate 11.00 s, vacuum 0.52 s, primary keys 2.53 s).
-
 ### Benchmark Results
 ```
 pgbench (16.8 (Ubuntu 16.8-1.pgdg24.04+1))
 starting vacuum...end.
-pgbench: error: could not open logfile "pgbench_log.4254": Permission denied
-pgbench: error: could not open logfile "pgbench_log.4254.1": Permission denied
+progress: 5.0 s, 2892.6 tps, lat 5.513 ms stddev 4.775, 0 failed
+progress: 10.0 s, 2846.4 tps, lat 5.621 ms stddev 5.366, 0 failed
+progress: 15.0 s, 2869.0 tps, lat 5.576 ms stddev 5.150, 0 failed
+progress: 20.0 s, 2908.2 tps, lat 5.500 ms stddev 4.963, 0 failed
+progress: 25.0 s, 2893.6 tps, lat 5.528 ms stddev 4.720, 0 failed
+progress: 30.0 s, 2931.6 tps, lat 5.458 ms stddev 4.972, 0 failed
+progress: 35.0 s, 2910.6 tps, lat 5.496 ms stddev 4.848, 0 failed
+progress: 40.0 s, 2919.4 tps, lat 5.479 ms stddev 4.721, 0 failed
+progress: 45.0 s, 2891.8 tps, lat 5.530 ms stddev 4.748, 0 failed
+progress: 50.0 s, 2865.8 tps, lat 5.540 ms stddev 4.984, 0 failed
+progress: 55.0 s, 2898.6 tps, lat 5.562 ms stddev 4.957, 0 failed
+progress: 60.0 s, 2880.9 tps, lat 5.552 ms stddev 4.959, 0 failed
+transaction type: <builtin: TPC-B (sort of)>
+scaling factor: 1
+query mode: simple
+number of clients: 16
+number of threads: 4
+maximum number of tries: 1
+duration: 60 s
+number of transactions actually processed: 173558
+number of failed transactions: 0 (0.000%)
+latency average = 5.530 ms
+latency stddev = 4.933 ms
+initial connection time = 10.794 ms
+tps = 2892.485865 (without initial connection time)
 ```
