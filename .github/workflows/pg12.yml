@@ -1,11 +1,9 @@
 name: PostgreSQL 12 Benchmark
 
 on:
-  workflow_run:
-    workflows: ["PostgreSQL 11 Benchmark"]
-    types:
-      - completed
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
