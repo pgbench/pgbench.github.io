@@ -43,7 +43,6 @@ jobs:
           Memory: $(free -h | grep Mem | awk '{print $2}')
           \`\`\`
 
-          ### Initial Setup
           EOF
 
           # Initialize and run benchmark
