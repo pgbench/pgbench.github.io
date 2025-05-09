@@ -56,6 +56,7 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           sudo systemctl start postgresql.service
+          sudo service postgresql start
           psql $POSTGRES_URL -c "CREATE EXTENSION IF NOT EXISTS postgis;"
           sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
           sudo -u postgres psql -c "CREATE DATABASE test_db OWNER test_user;"
