@@ -1,8 +1,10 @@
 name: PostgreSQL 14 Benchmark
 
 on:
-  push:
-    branches: ["main"]
+  workflow_run:
+    workflows: ["PostgreSQL 13 Benchmark"]
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -10,7 +12,6 @@ permissions:
 
 jobs:
   benchmark:
-    needs: [pg13]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
