@@ -56,12 +56,36 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           sudo systemctl start postgresql.service
-          sudo service postgresql start
+          # sudo service postgresql start
           sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
           sudo -u postgres psql -c "CREATE DATABASE test_db OWNER test_user;"
 
-          sudo -u postgres pgbench -i -U postgres postgres
-          sudo -u postgres pgbench -c 16 -j 4 -T 60 -s 100 -U postgres postgres
+          # Run pgbench and capture output
+          echo "+++
+          date = '$(date +%Y-%m-%dT%H:%M:%S%z)'
+          draft = false
+          title = 'PostgreSQL 17 Benchmark Results'
+          +++" > hugosite/content/benchmarkpg17.md
+
+          echo "## PgBench Results for PostgreSQL 17" >> hugosite/content/benchmarkpg17.md
+          echo "" >> hugosite/content/benchmarkpg17.md
+
+          # Initialize and run benchmark, capture output
+          sudo -u postgres pgbench -i -s 100 -U postgres postgres 2>&1 | tee setup_output.txt
+          echo "### Initial Setup" >> hugosite/content/benchmarkpg17.md
+          echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
+          cat setup_output.txt >> hugosite/content/benchmarkpg17.md
+          echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
+          echo "" >> hugosite/content/benchmarkpg17.md
+
+          # Run benchmark test and capture output
+          echo "### Benchmark Results" >> hugosite/content/benchmarkpg17.md
+          echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
+          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -r --aggregate-interval=5 -U postgres postgres 2>&1 | tee benchmark_output.txt
+          cat benchmark_output.txt >> hugosite/content/benchmarkpg17.md
+          echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
+
+          # Build Hugo site
           cd hugosite
           hugo \
             --minify \
