@@ -61,7 +61,7 @@ jobs:
           sudo -u postgres psql -c "CREATE DATABASE test_db OWNER test_user;"
 
           sudo -u postgres pgbench -i -U postgres postgres
-          sudo -u postgres pgbench -i -c 16 -j 4 -T 60 -s 100 -U postgres postgres
+          sudo -u postgres pgbench -c 16 -j 4 -T 60 -s 100 -U postgres postgres
           cd hugosite
           hugo \
             --minify \
