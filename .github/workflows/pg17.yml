@@ -10,7 +10,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -86,6 +86,11 @@ jobs:
           hugo \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+      - name: Commit benchmark results
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update PostgreSQL 17 benchmark results"
+          file_pattern: 'hugosite/content/benchmarkpg17.md'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
