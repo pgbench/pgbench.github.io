@@ -2,9 +2,10 @@ name: PostgreSQL 16 Benchmark
 
 on:
   workflow_run:
-    workflows: ["PostgreSQL 15 Benchmark"]
+    workflows: ["PostgreSQL 15 Benchmark"]  # Must match exactly with pg15.yml name
     types:
       - completed
+    branches: [main]
   workflow_dispatch:
 
 permissions:
