@@ -74,10 +74,10 @@ pagination.pagerSize = 5
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Terminal"
+    title = "PgBench"
 
     [languages.en.params]
-      subtitle = "A simple, retro theme for Hugo"
+      subtitle = "PgBench site for sharing benchmark results"
       owner = ""
       keywords = ""
       copyright = ""
@@ -92,7 +92,7 @@ pagination.pagerSize = 5
       words = "words"
 
       [languages.en.params.logo]
-        logoText = "Terminal"
+        logoText = "PgBench"
         logoHomeLink = "/"
 
       [languages.en.menu]
@@ -104,3 +104,7 @@ pagination.pagerSize = 5
           identifier = "showcase"
           name = "Showcase"
           url = "/showcase"
+        [[languages.en.menu.main]]
+          identifier="PG17"
+          name="Postgres17"
+          url="/benchmarkpg17"
