@@ -105,6 +105,10 @@ pagination.pagerSize = 5
           name = "Showcase"
           url = "/showcase"
         [[languages.en.menu.main]]
-          identifier="PG17"
-          name="Postgres17"
-          url="/benchmarkpg17"
+          identifier = "pg13"
+          name = "Postgres 13"
+          url = "/benchmarkpg13"
+        [[languages.en.menu.main]]
+          identifier = "pg17"
+          name = "Postgres 17"
+          url = "/benchmarkpg17"

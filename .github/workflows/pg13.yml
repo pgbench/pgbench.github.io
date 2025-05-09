@@ -1,0 +1,59 @@
+name: PostgreSQL 13 Benchmark
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PostgreSQL 13
+        uses: tj-actions/install-postgresql@v3
+        with:
+          postgresql-version: 13
+
+      - name: Run PgBench
+        run: |
+          sudo systemctl start postgresql.service
+          sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
+
+          # Create benchmark markdown file
+          cat << EOF > hugosite/content/benchmarkpg13.md
+          +++
+          date = '$(date +%Y-%m-%dT%H:%M:%S%z)'
+          draft = false
+          title = 'PostgreSQL 13 Benchmark Results'
+          +++
+
+          ## PgBench Results for PostgreSQL 13
+
+          ### System Information
+          \`\`\`
+          $(lscpu | grep -E '^(Model name|CPU\(s\)|Thread|CPU MHz)')
+          Memory: $(free -h | grep Mem | awk '{print $2}')
+          \`\`\`
+
+          ### Initial Setup
+          EOF
+
+          # Initialize and run benchmark
+          sudo -u postgres pgbench -i -s 100 -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/benchmarkpg13.md)
+          echo "" >> hugosite/content/benchmarkpg13.md
+          
+          echo "### Benchmark Results" >> hugosite/content/benchmarkpg13.md
+          echo "\`\`\`" >> hugosite/content/benchmarkpg13.md
+          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 --log -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/benchmarkpg13.md)
+          echo "\`\`\`" >> hugosite/content/benchmarkpg13.md
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add hugosite/content/benchmarkpg13.md
+          git commit -m "Update PostgreSQL 13 benchmark results"
+          git push

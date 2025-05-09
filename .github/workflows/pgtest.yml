@@ -1,4 +1,4 @@
-name: Run postgresql test
+name: PostgreSQL 17 Benchmark and Site Deploy
 
 on:
   push:
@@ -27,6 +27,7 @@ defaults:
 jobs:
   # Build job
   build:
+    needs: [pg13]  # Add this line to make it wait for pg13 workflow
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.147.2
