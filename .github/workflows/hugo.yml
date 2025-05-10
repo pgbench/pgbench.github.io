@@ -1,4 +1,4 @@
-name: Site Deploy
+name: Publish Hugo Site
 
 on:
   workflow_call:

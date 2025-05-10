@@ -9,6 +9,19 @@ pagination.pagerSize = 5
 [markup.highlight]
   noClasses = false
 
+[markup.goldmark.renderer]
+  unsafe = true
+
+[security]
+  enableInlineShortcodes = true
+  [security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$']
+  [security.funcs]
+    getenv = ['^HUGO_']
+  [security.http]
+    methods = ['(?i)GET|POST']
+    urls = ['.*']
+
 [params]
   # dir name of your main content (default is `content/posts`).
   # the list of set content will show up on your index page (baseurl).
@@ -121,3 +134,7 @@ pagination.pagerSize = 5
           identifier = "pg17"
           name = "Postgres 17"
           url = "/pg17"
+        [[languages.en.menu.main]]
+          identifier = "mix"
+          name = "Total mix results"
+          url = "/mix"
