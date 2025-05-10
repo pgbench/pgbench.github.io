@@ -6,6 +6,12 @@ on:
       - main
 permissions: 
   contents: write
+  id-token: write
+  pages: write
+  pull-requests: write
+  deployments: write
+  statuses: write
+  checks: write
 jobs:
   pg12:
     uses: ./.github/workflows/pg12.yml
