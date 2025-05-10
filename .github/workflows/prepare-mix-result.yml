@@ -21,11 +21,12 @@ jobs:
         set -xe
         git pull
         
+        DATE=$(date +%Y-%m-%d)
         # Create front matter
-        cat << 'EOF' > hugosite/content/mix.md
+        cat << EOF > hugosite/content/mix.md
         +++
         title = "PostgreSQL Performance Comparison"
-        date = $(date +%Y-%m-%d)
+        date = ${DATE}
         draft = false
         +++
 
@@ -42,26 +43,26 @@ jobs:
         |-------------------|--------------|--------------|-----|
         EOF
                 
-                # Collect transactions
-                transactions=($(grep "number of transactions actually processed" hugosite/content/pg*.md | \
-                  sed -E 's/.*number of transactions actually processed: ([0-9]+).*/\1/'))
-                
-                # Collect latencies
-                latencies=($(grep "latency average" hugosite/content/pg*.md | \
-                  sed -E 's/.*latency average = ([0-9.]+).*/\1/'))
-                
-                # Collect TPS
-                tps=($(grep -h "tps = " hugosite/content/pg*.md | head -n 1 -q | \
-                  sed -E 's/.*tps = ([0-9.]+).*/\1/'))
-                
-                # Generate data rows
-                for i in {12..17}; do
-                  idx=$((i-12))
-                  echo "| PG$i | ${transactions[$idx]} | ${latencies[$idx]} | ${tps[$idx]} |" >> hugosite/content/mix.md
-                done
-                
-                # Add JavaScript chart configuration
-                cat << 'EOF' >> hugosite/content/mix.md
+        # Collect transactions
+        transactions=($(grep "number of transactions actually processed" hugosite/content/pg*.md | \
+          sed -E 's/.*number of transactions actually processed: ([0-9]+).*/\1/'))
+        
+        # Collect latencies
+        latencies=($(grep "latency average" hugosite/content/pg*.md | \
+          sed -E 's/.*latency average = ([0-9.]+).*/\1/'))
+        
+        # Collect TPS
+        tps=($(grep -h "tps = " hugosite/content/pg*.md | head -n 1 -q | \
+          sed -E 's/.*tps = ([0-9.]+).*/\1/'))
+        
+        # Generate data rows
+        for i in {12..17}; do
+          idx=$((i-12))
+          echo "| PG$i | ${transactions[$idx]} | ${latencies[$idx]} | ${tps[$idx]} |" >> hugosite/content/mix.md
+        done
+        
+        # Add JavaScript chart configuration
+        cat << EOF >> hugosite/content/mix.md
 
         <script>
         document.addEventListener('DOMContentLoaded', function() {
