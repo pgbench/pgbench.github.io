@@ -1,6 +1,6 @@
 +++
 title = "PostgreSQL Performance Comparison"
-date = $(date +%Y-%m-%d)
+date = 2025-05-10
 draft = false
 +++
 
@@ -15,12 +15,12 @@ draft = false
 
 | PostgreSQL Version | Transactions | Latency (ms) | TPS |
 |-------------------|--------------|--------------|-----|
-| PG12 | 143041 | 6.710 | 2383.425686 |
-| PG13 | 161857 | 5.930 |  |
-| PG14 | 185261 | 5.181 |  |
-| PG15 | 173194 | 5.542 |  |
-| PG16 | 181540 | 5.287 |  |
-| PG17 | 152446 | 6.296 |  |
+| PG12 | 160782 | 5.969 | 2679.027221 |
+| PG13 | 146415 | 6.555 |  |
+| PG14 | 157673 | 6.087 |  |
+| PG15 | 173339 | 5.537 |  |
+| PG16 | 144275 | 6.653 |  |
+| PG17 | 158929 | 6.039 |  |
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -30,21 +30,21 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [
             {
                 label: 'Transactions Processed',
-                data: [${transactions[@]}],
+                data: [160782 146415 157673 173339 144275 158929],
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 yAxisID: 'y'
             },
             {
                 label: 'Latency Average (ms)',
-                data: [${latencies[@]}],
+                data: [5.969 6.555 6.087 5.537 6.653 6.039],
                 borderColor: 'rgb(54, 162, 235)',
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 yAxisID: 'y1'
             },
             {
                 label: 'TPS',
-                data: [${tps[@]}],
+                data: [2679.027221],
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
                 yAxisID: 'y2'
