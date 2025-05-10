@@ -27,6 +27,7 @@ jobs:
 
       - name: Run PgBench
         run: |
+          git pull
           sudo systemctl start postgresql.service
           sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
 
