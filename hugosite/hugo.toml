@@ -99,13 +99,9 @@ pagination.pagerSize = 5
 
       [languages.en.params.logo]
         logoText = "PgBench"
-        logoHomeLink = "/about"
+        logoHomeLink = "/"
 
       [languages.en.menu]
-        [[languages.en.menu.main]]
-          identifier = "about"
-          name = "About"
-          url = "/about"
         [[languages.en.menu.main]]
           identifier = "pg12"
           name = "Postgres 12"

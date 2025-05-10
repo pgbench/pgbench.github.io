@@ -25,12 +25,12 @@ This site automatically runs PostgreSQL performance benchmarks across multiple P
    - Default TPC-B-like transaction script
 
 3. **Versions Tested**
-   - PostgreSQL 12
-   - PostgreSQL 13
-   - PostgreSQL 14
-   - PostgreSQL 15
-   - PostgreSQL 16
-   - PostgreSQL 17
+   - [PostgreSQL 12](/pg12)
+   - [PostgreSQL 13](/pg13)
+   - [PostgreSQL 14](/pg14)
+   - [PostgreSQL 15](/pg15)
+   - [PostgreSQL 16](/pg16)
+   - [PostgreSQL 17](/pg17)
 
 ### How Results Are Shared
 
