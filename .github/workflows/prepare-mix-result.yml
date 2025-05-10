@@ -20,6 +20,7 @@ jobs:
       run: |
         set -xe
         git pull
+        chmod +x ./hugosite/collect-mix-result.sh
         ./hugosite/collect-mix-result.sh
 
     - name: Commit results
