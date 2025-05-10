@@ -1,4 +1,4 @@
-name: Parallel Jobs with Deployment
+name: PostgreSQL Benchmark Workflow
 
 on:
   push:
@@ -16,6 +16,7 @@ jobs:
   pg12:
     uses: ./.github/workflows/pg12.yml
   pg13:
+    needs: pg12
     uses: ./.github/workflows/pg13.yml
   pg14:
     needs: pg13
@@ -27,10 +28,5 @@ jobs:
     needs: pg15
     uses: ./.github/workflows/pg16.yml
   pg17:
-    needs:
-      - pg12
-      - pg13
-      - pg14
-      - pg15
-      - pg16
+    needs: pg16
     uses: ./.github/workflows/pg17.yml
