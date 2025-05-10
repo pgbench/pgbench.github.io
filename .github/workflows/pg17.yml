@@ -23,7 +23,6 @@ defaults:
 jobs:
   # Build job
   build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.147.2
@@ -36,8 +35,6 @@ jobs:
         run: sudo snap install dart-sass
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
       - name: Setup PostgreSQL
         uses: tj-actions/install-postgresql@v3
         with:
@@ -52,6 +49,7 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
         run: |
+          git pull
           sudo systemctl start postgresql.service
           # sudo service postgresql start
           sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
