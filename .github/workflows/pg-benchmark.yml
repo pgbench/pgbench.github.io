@@ -22,6 +22,7 @@ jobs:
 
       - name: Run PgBench
         run: |
+          set -xe
           git pull
           # Remove existing PostgreSQL installation
           sudo apt-get remove --purge postgresql*
@@ -45,7 +46,11 @@ jobs:
 
           # Get PostgreSQL full version
           PG_FULL_VERSION=$(sudo -u postgres psql -c "select version();" )
-
+          if ! echo "$PG_FULL_VERSION" | grep -q "PostgreSQL ${{ env.PG_VERSION }}"; then
+            echo "Error: Installed PostgreSQL version does not match requested version ${{ env.PG_VERSION }}"
+            echo "Installed version: $PG_FULL_VERSION"
+            exit 1
+          fi
           # Create benchmark markdown file
           cat << EOF > hugosite/content/pg${PG_VERSION}.md
           +++
