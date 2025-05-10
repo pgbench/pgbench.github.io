@@ -16,12 +16,16 @@ jobs:
   pg12:
     uses: ./.github/workflows/pg12.yml
   pg13:
+    needs: pg12
     uses: ./.github/workflows/pg13.yml
   pg14:
+    needs: pg13
     uses: ./.github/workflows/pg14.yml
   pg15:
+    needs: pg14
     uses: ./.github/workflows/pg15.yml
   pg16:
+    needs: pg15
     uses: ./.github/workflows/pg16.yml
   pg17:
     needs:
