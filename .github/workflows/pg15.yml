@@ -48,7 +48,6 @@ jobs:
           echo "\`\`\`" >> hugosite/content/benchmarkpg15.md
           sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/benchmarkpg15.md)
           echo "\`\`\`" >> hugosite/content/benchmarkpg15.md
-          git pull --rebase origin main
 
       - name: Commit benchmark results
         uses: stefanzweifel/git-auto-commit-action@v4
