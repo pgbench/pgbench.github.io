@@ -1,11 +1,6 @@
 name: PostgreSQL 17 Benchmark and Site Deploy
 
 on:
-  workflow_run:
-    workflows: ["PostgreSQL 16 Benchmark"]
-    types:
-      - completed
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
