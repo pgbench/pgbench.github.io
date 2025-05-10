@@ -1,26 +1,26 @@
 +++
-title = "PostgreSQL Performance Comparison (Mock)"
-date = 2025-05-10
+title = "PostgreSQL Performance Comparison"
+date = $(date +%Y-%m-%d)
 draft = false
 +++
 
-## PostgreSQL Version Comparison (Test Data)
+## PostgreSQL Version Comparison
 
-<div style="height: 400px;">
+<div>
   <canvas id="performanceChart"></canvas>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 ### Raw Data
 
-| PostgreSQL Version | Transactions | Latency (ms) | TPS     |
-| ------------------ | ------------ | ------------ | ------- |
-| PG12               | 159246       | 6.027        | 2653.53 |
-| PG13               | 152577       | 6.291        | 2542.30 |
-| PG14               | 163376       | 5.875        | 2722.80 |
-| PG15               | 159900       | 6.002        | 2664.91 |
-| PG16               | 170771       | 5.620        | 2846.03 |
-| PG17               | 173005       | 5.548        | 2883.20 |
+| PostgreSQL Version | Transactions | Latency (ms) | TPS |
+|-------------------|--------------|--------------|-----|
+| PG12 | 143041 | 6.710 | 2383.425686 |
+| PG13 | 161857 | 5.930 |  |
+| PG14 | 185261 | 5.181 |  |
+| PG15 | 173194 | 5.542 |  |
+| PG16 | 181540 | 5.287 |  |
+| PG17 | 152446 | 6.296 |  |
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -30,21 +30,21 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [
             {
                 label: 'Transactions Processed',
-                data: [159246, 152577, 163376, 159900, 170771, 173005],
+                data: [${transactions[@]}],
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 yAxisID: 'y'
             },
             {
                 label: 'Latency Average (ms)',
-                data: [6.027, 6.291, 5.875, 6.002, 5.620, 5.548],
+                data: [${latencies[@]}],
                 borderColor: 'rgb(54, 162, 235)',
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 yAxisID: 'y1'
             },
             {
                 label: 'TPS',
-                data: [2653.53, 2542.30, 2722.80, 2664.91, 2846.03, 2883.20],
+                data: [${tps[@]}],
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
                 yAxisID: 'y2'
@@ -57,8 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
         data: data,
         options: {
             responsive: true,
-            maintainAspectRatio: true,
-            aspectRatio: 2,  // Width:Height ratio
             interaction: {
                 mode: 'index',
                 intersect: false,
