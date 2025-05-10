@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       pg_version:
-        description: 'PostgreSQL version to benchmark'
+        description: "PostgreSQL version to benchmark"
         required: true
         type: string
 
@@ -39,10 +39,10 @@ jobs:
           +++
           date = '$(date +%Y-%m-%dT%H:%M:%S%z)'
           draft = false
-          title = 'PostgreSQL ${PG_VERSION} Benchmark Results'
+          title = 'PostgreSQL ${{ env.PG_VERSION }} Benchmark Results'
           +++
 
-          ## PgBench Results for PostgreSQL ${PG_VERSION}
+          ## PgBench Results for PostgreSQL ${{ env.PG_VERSION }}
 
           ### PostgreSQL Version
           \`\`\`
@@ -69,4 +69,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Update PostgreSQL ${{ env.PG_VERSION }} benchmark results"
-          file_pattern: 'hugosite/content/pg${{ env.PG_VERSION }}.md'
+          file_pattern: "hugosite/content/pg${{ env.PG_VERSION }}.md"

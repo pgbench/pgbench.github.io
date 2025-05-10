@@ -39,4 +39,9 @@ jobs:
       pg_version: '16'
   pg17:
     needs: pg16
-    uses: ./.github/workflows/pg17.yml
+    uses: ./.github/workflows/pg-benchmark.yml
+    with:
+      pg_version: '17'
+  deploy:
+    needs: pg17
+    uses: ./.github/workflows/hugo.yml
