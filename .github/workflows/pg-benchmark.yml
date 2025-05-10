@@ -20,14 +20,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PostgreSQL ${{ env.PG_VERSION }}
-        uses: tj-actions/install-postgresql@v3
-        with:
-          postgresql-version: ${{ env.PG_VERSION }}
-
       - name: Run PgBench
         run: |
           git pull
+          # Remove existing PostgreSQL installation
+          sudo apt-get remove --purge postgresql*
+          sudo apt-get autoremove
+          sudo rm -rf /var/lib/postgresql/
+          sudo rm -rf /var/log/postgresql/
+          sudo rm -rf /etc/postgresql/
+
+          sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+          # Import the repository signing key:
+          wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+          # Update the package lists:
+          sudo apt-get update
+
+          # Install PostgreSQL
+          sudo apt-get install -y "postgresql-${{ inputs.pg_version }}"
           sudo systemctl start postgresql.service
           sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
 
