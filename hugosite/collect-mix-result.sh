@@ -1,6 +1,11 @@
+#!/bin/bash
+set -x
+DATE=$(date +%Y-%m-%d)
+# Create front matter
+cat << EOF > hugosite/content/mix.md
 +++
 title = "PostgreSQL Performance Comparison"
-date = 2025-05-10
+date = ${DATE}
 draft = false
 +++
 
@@ -13,14 +18,34 @@ draft = false
 
 ### Raw Data
 
-| PostgreSQL Version | Transactions | Latency (ms) | TPS         |
-| ------------------ | ------------ | ------------ | ----------- |
-| PG12               | 160782       | 5.969        | 2679.027221 |
-| PG13               | 146415       | 6.555        | 2439.646892 |
-| PG14               | 157673       | 6.087        | 2627.691994 |
-| PG15               | 173339       | 5.537        | 2888.772886 |
-| PG16               | 144275       | 6.653        | 2404.463831 |
-| PG17               | 158929       | 6.039        | 2648.650111 |
+| PostgreSQL Version | Transactions | Latency (ms) | TPS |
+|-------------------|--------------|--------------|-----|
+EOF
+        
+# Collect transactions
+transactions=($(grep "number of transactions actually processed" hugosite/content/pg*.md | \
+    sed -E 's/.*number of transactions actually processed: ([0-9]+).*/\1/'))
+
+# Collect latencies
+latencies=($(grep "latency average" hugosite/content/pg*.md | \
+    sed -E 's/.*latency average = ([0-9.]+).*/\1/'))
+
+# Collect TPS
+tps=()
+for ver in {12..17}; do
+    value=$(grep "tps = " "hugosite/content/pg${ver}.md" | head -n 1 | \
+        sed -E 's/.*tps = ([0-9.]+).*/\1/')
+    tps+=("$value")
+done
+
+# Generate data rows
+for i in {12..17}; do
+    idx=$((i-12))
+    echo "| PG$i | ${transactions[$idx]} | ${latencies[$idx]} | ${tps[$idx]} |" >> hugosite/content/mix.md
+done
+
+# Add JavaScript chart configuration
+cat << EOF >> hugosite/content/mix.md
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -30,21 +55,21 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [
             {
                 label: 'Transactions Processed',
-                data: [160782,146415,157673,173339,144275,158929],
+                data: [$(IFS=,; echo "${transactions[*]}")],
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 yAxisID: 'y'
             },
             {
                 label: 'Latency Average (ms)',
-                data: [5.969,6.555,6.087,5.537,6.653,6.039],
+                data: [$(IFS=,; echo "${latencies[*]}")],
                 borderColor: 'rgb(54, 162, 235)',
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 yAxisID: 'y1'
             },
             {
                 label: 'TPS',
-                data: [2679.027221,2439.646892,2627.691994,2888.772886,2404.463831,2648.650111],
+                data: [$(IFS=,; echo "${tps[*]}")],
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
                 yAxisID: 'y2'
@@ -103,3 +128,4 @@ document.addEventListener('DOMContentLoaded', function() {
     new Chart(ctx, config);
 });
 </script>
+EOF
