@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-
+permissions: 
+  contents: write
 jobs:
   pg12:
     uses: ./.github/workflows/pg12.yml
