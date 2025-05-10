@@ -101,26 +101,30 @@ pagination.pagerSize = 5
           name = "About"
           url = "/about"
         [[languages.en.menu.main]]
+          identifier = "pg12"
+          name = "Postgres 12"
+          url = "/pg12"
+        [[languages.en.menu.main]]
           identifier = "pg13"
           name = "Postgres 13"
-          url = "/benchmarkpg13"
+          url = "/pg13"
         [[languages.en.menu.main]]
           identifier = "pg14"
           name = "Postgres 14"
-          url = "/benchmarkpg14"
+          url = "/pg14"
         [[languages.en.menu.main]]
           identifier = "pg14"
           name = "Postgres 14"
-          url = "/benchmarkpg14"
+          url = "/pg14"
         [[languages.en.menu.main]]
           identifier = "pg15"
           name = "Postgres 15"
-          url = "/benchmarkpg15"
+          url = "/pg15"
         [[languages.en.menu.main]]
           identifier = "pg16"
           name = "Postgres 16"
-          url = "/benchmarkpg16"
+          url = "/pg16"
         [[languages.en.menu.main]]
           identifier = "pg17"
           name = "Postgres 17"
-          url = "/benchmarkpg17"
+          url = "/pg17"

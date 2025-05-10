@@ -1,7 +1,12 @@
-name: PostgreSQL ${{ inputs.pg_version }} Benchmark
+name: PostgreSQL Benchmark
 
 on:
-  workflow_call: 
+  workflow_call:
+    inputs:
+      pg_version:
+        description: 'PostgreSQL version to benchmark'
+        required: true
+        type: string
 
 permissions:
   contents: write
