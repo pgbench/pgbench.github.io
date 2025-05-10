@@ -1,5 +1,6 @@
 name: Prepare Mix Result
-
+on:
+  workflow_call:
 permissions:
   contents: write
   pages: write
