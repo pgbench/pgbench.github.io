@@ -15,13 +15,13 @@ pagination.pagerSize = 5
   contentTypeName = "posts"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 2
+  showMenuItems = 20
 
   # show selector to switch language
   showLanguageSelector = false
 
   # set theme to full screen width
-  fullWidthTheme = false
+  fullWidthTheme = true
 
   # center theme with default width
   centerTheme = false
@@ -78,9 +78,9 @@ pagination.pagerSize = 5
 
     [languages.en.params]
       subtitle = "PgBench site for sharing benchmark results"
-      owner = ""
-      keywords = ""
-      copyright = ""
+      owner = "Özkan Pakdil"
+      keywords = "PostgreSQL,PgBench,benchmark"
+      copyright = "MIT"
       menuMore = "Show more"
       readMore = "Read more"
       readOtherPosts = "Read other posts"
@@ -93,17 +93,13 @@ pagination.pagerSize = 5
 
       [languages.en.params.logo]
         logoText = "PgBench"
-        logoHomeLink = "/"
+        logoHomeLink = "/about"
 
       [languages.en.menu]
         [[languages.en.menu.main]]
           identifier = "about"
           name = "About"
           url = "/about"
-        [[languages.en.menu.main]]
-          identifier = "showcase"
-          name = "Showcase"
-          url = "/showcase"
         [[languages.en.menu.main]]
           identifier = "pg13"
           name = "Postgres 13"

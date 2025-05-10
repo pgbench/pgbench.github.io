@@ -14,19 +14,29 @@ permissions:
   checks: write
 jobs:
   pg12:
-    uses: ./.github/workflows/pg12.yml
+    uses: ./.github/workflows/pg-benchmark.yml
+    with:
+      pg_version: '12'
   pg13:
     needs: pg12
-    uses: ./.github/workflows/pg13.yml
+    uses: ./.github/workflows/pg-benchmark.yml
+    with:
+      pg_version: '13'
   pg14:
     needs: pg13
-    uses: ./.github/workflows/pg14.yml
+    uses: ./.github/workflows/pg-benchmark.yml
+    with:
+      pg_version: '14'
   pg15:
     needs: pg14
-    uses: ./.github/workflows/pg15.yml
+    uses: ./.github/workflows/pg-benchmark.yml
+    with:
+      pg_version: '15'
   pg16:
     needs: pg15
-    uses: ./.github/workflows/pg16.yml
+    uses: ./.github/workflows/pg-benchmark.yml
+    with:
+      pg_version: '16'
   pg17:
     needs: pg16
     uses: ./.github/workflows/pg17.yml

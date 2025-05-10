@@ -55,25 +55,36 @@ jobs:
           sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password' CREATEDB;"
           sudo -u postgres psql -c "CREATE DATABASE test_db OWNER test_user;"
 
-          # Run pgbench and capture output
-          echo "+++
+          # Get PostgreSQL version
+          PG_VERSION=$(sudo -u postgres psql -c "select version();")
+
+          # Create benchmark markdown file
+          cat << EOF > hugosite/content/pg17.md
+          +++
           date = '$(date +%Y-%m-%dT%H:%M:%S%z)'
           draft = false
           title = 'PostgreSQL 17 Benchmark Results'
-          +++" > hugosite/content/benchmarkpg17.md
+          +++
 
-          echo "## PgBench Results for PostgreSQL 17" >> hugosite/content/benchmarkpg17.md
-          echo "" >> hugosite/content/benchmarkpg17.md
+          ## PgBench Results for PostgreSQL ${PG_VERSION}
+
+          ### System Information
+          \`\`\`
+          $(lscpu | grep -E '^(Model name|CPU\(s\)|Thread|CPU MHz)')
+          Memory: $(free -h | grep Mem | awk '{print $2}')
+          \`\`\`
+
+          EOF
 
           # Initialize and run benchmark, capture output
           sudo -u postgres pgbench -i 
 
           # Run benchmark test and capture output
-          echo "### Benchmark Results" >> hugosite/content/benchmarkpg17.md
-          echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
+          echo "### Benchmark Results" >> hugosite/content/pg17.md
+          echo "\`\`\`" >> hugosite/content/pg17.md
           sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee benchmark_output.txt
-          cat benchmark_output.txt >> hugosite/content/benchmarkpg17.md
-          echo "\`\`\`" >> hugosite/content/benchmarkpg17.md
+          cat benchmark_output.txt >> hugosite/content/pg17.md
+          echo "\`\`\`" >> hugosite/content/pg17.md
 
           # Build Hugo site
           cd hugosite
@@ -84,7 +95,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Update PostgreSQL 17 benchmark results"
-          file_pattern: 'hugosite/content/benchmarkpg17.md'
+          file_pattern: 'hugosite/content/pg17.md'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

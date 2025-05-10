@@ -1,4 +1,4 @@
-name: PostgreSQL 12 Benchmark
+name: PostgreSQL ${{ inputs.pg_version }} Benchmark
 
 on:
   workflow_call: 
@@ -10,7 +10,7 @@ jobs:
   benchmark:
     runs-on: ubuntu-latest
     env:
-      PG_VERSION: 12
+      PG_VERSION: ${{ inputs.pg_version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
