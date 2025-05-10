@@ -54,3 +54,4 @@ jobs:
         with:
           commit_message: "Update PostgreSQL 13 benchmark results"
           file_pattern: 'hugosite/content/benchmarkpg13.md'
+          push_options: '--rebase=true'

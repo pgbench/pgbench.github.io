@@ -87,6 +87,7 @@ jobs:
         with:
           commit_message: "Update PostgreSQL 17 benchmark results"
           file_pattern: 'hugosite/content/benchmarkpg17.md'
+          push_options: '--rebase=true'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
