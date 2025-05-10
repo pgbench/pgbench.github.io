@@ -13,14 +13,14 @@ draft = false
 
 ### Raw Data
 
-| PostgreSQL Version | Transactions | Latency (ms) | TPS         |
-| ------------------ | ------------ | ------------ | ----------- |
-| PG12               | 160782       | 5.969        | 2679.027221 |
-| PG13               | 146415       | 6.555        | 2439.646892 |
-| PG14               | 157673       | 6.087        | 2627.691994 |
-| PG15               | 173339       | 5.537        | 2888.772886 |
-| PG16               | 144275       | 6.653        | 2404.463831 |
-| PG17               | 158929       | 6.039        | 2648.650111 |
+| PostgreSQL Version | Transactions | Latency (ms) | TPS |
+|-------------------|--------------|--------------|-----|
+| PG12 | 153671 | 6.246 | 2560.542248 |
+| PG13 | 145184 | 6.611 | 2419.180064 |
+| PG14 | 165215 | 5.809 | 2753.363936 |
+| PG15 | 163963 | 5.854 | 2732.491008 |
+| PG16 | 154815 | 6.200 | 2580.088615 |
+| PG17 | 149566 | 6.417 | 2492.591271 |
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -30,21 +30,21 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [
             {
                 label: 'Transactions Processed',
-                data: [160782,146415,157673,173339,144275,158929],
+                data: [153671,145184,165215,163963,154815,149566],
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 yAxisID: 'y'
             },
             {
                 label: 'Latency Average (ms)',
-                data: [5.969,6.555,6.087,5.537,6.653,6.039],
+                data: [6.246,6.611,5.809,5.854,6.200,6.417],
                 borderColor: 'rgb(54, 162, 235)',
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 yAxisID: 'y1'
             },
             {
                 label: 'TPS',
-                data: [2679.027221,2439.646892,2627.691994,2888.772886,2404.463831,2648.650111],
+                data: [2560.542248,2419.180064,2753.363936,2732.491008,2580.088615,2492.591271],
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
                 yAxisID: 'y2'
