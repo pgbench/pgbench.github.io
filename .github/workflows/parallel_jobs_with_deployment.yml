@@ -7,45 +7,20 @@ on:
 
 jobs:
   pg12:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run pg12
-        run: echo "Running pg12"
-
+    uses: ./.github/workflows/pg12.yml
   pg13:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run pg13
-        run: echo "Running pg13"
-
+    uses: ./.github/workflows/pg13.yml
   pg14:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run pg14
-        run: echo "Running pg14"
-
+    uses: ./.github/workflows/pg14.yml
   pg15:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run pg15
-        run: echo "Running pg15"
-
+    uses: ./.github/workflows/pg15.yml
   pg16:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run pg16
-        run: echo "Running pg16"
-
+    uses: ./.github/workflows/pg16.yml
   pg17:
-    runs-on: ubuntu-latest
     needs:
       - pg12
       - pg13
       - pg14
       - pg15
       - pg16
-    steps:
-      - name: Run pg17
-        run: echo "Running pg17 and deploying the site"
-      - name: Deploy Site
-        run: echo "Deploying the site"
+    uses: ./.github/workflows/pg17.yml

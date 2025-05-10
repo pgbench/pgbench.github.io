@@ -1,8 +1,8 @@
 name: PostgreSQL 12 Benchmark
 
 on:
-  workflow_dispatch:
-    
+  workflow_call: 
+
 permissions:
   contents: write
 

@@ -1,7 +1,7 @@
 name: PostgreSQL 16 Benchmark
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: write
@@ -9,11 +9,7 @@ permissions:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Only run if pg15 succeeded
     steps:
-      - name: Wait for previous workflow
-        run: sleep 30  # Add small delay to ensure git operations are complete
-
       - name: Checkout
         uses: actions/checkout@v4
 

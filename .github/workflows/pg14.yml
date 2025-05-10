@@ -1,7 +1,7 @@
 name: PostgreSQL 14 Benchmark
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: write

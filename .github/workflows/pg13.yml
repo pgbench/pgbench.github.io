@@ -1,7 +1,7 @@
 name: PostgreSQL 13 Benchmark
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: write
