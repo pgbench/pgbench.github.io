@@ -5,7 +5,6 @@ on:
     workflows: ["PostgreSQL 15 Benchmark"]  # Must match exactly with pg15.yml name
     types:
       - completed
-    branches: [main]
   workflow_dispatch:
 
 permissions:
