@@ -79,7 +79,7 @@ jobs:
 
           echo "### Benchmark Results" >> hugosite/content/pg${PG_VERSION}.md
           echo "\`\`\`" >> hugosite/content/pg${PG_VERSION}.md
-          sudo -u postgres pgbench -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/pg${PG_VERSION}.md)
+          sudo -u postgres pgbench -n -c 16 -j 4 -T 60 -P 5 -U postgres postgres 2>&1 | tee >(cat >> hugosite/content/pg${PG_VERSION}.md)
           echo "\`\`\`" >> hugosite/content/pg${PG_VERSION}.md
 
       - name: Commit benchmark results
