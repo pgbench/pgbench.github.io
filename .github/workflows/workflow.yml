@@ -42,8 +42,13 @@ jobs:
     uses: ./.github/workflows/pg-benchmark.yml
     with:
       pg_version: '17'
-  prepareMixResult:
+  pg18:
     needs: pg17
+    uses: ./.github/workflows/pg-benchmark.yml
+    with:
+      pg_version: '18'
+  prepareMixResult:
+    needs: pg18
     uses: ./.github/workflows/prepare-mix-result.yml
   deploy:
     needs: prepareMixResult
