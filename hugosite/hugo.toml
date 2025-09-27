@@ -131,6 +131,10 @@ pagination.pagerSize = 5
           name = "Postgres 17"
           url = "/pg17"
         [[languages.en.menu.main]]
+          identifier = "pg18"
+          name = "Postgres 18"
+          url = "/pg18"
+        [[languages.en.menu.main]]
           identifier = "mix"
           name = "Total mix results"
           url = "/mix"

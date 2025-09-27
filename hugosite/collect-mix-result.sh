@@ -22,24 +22,21 @@ draft = false
 |-------------------|--------------|--------------|-----|
 EOF
         
-# Collect transactions
-transactions=($(grep "number of transactions actually processed" hugosite/content/pg*.md | \
-    sed -E 's/.*number of transactions actually processed: ([0-9]+).*/\1/'))
-
-# Collect latencies
-latencies=($(grep "latency average" hugosite/content/pg*.md | \
-    sed -E 's/.*latency average = ([0-9.]+).*/\1/'))
-
-# Collect TPS
+# Collect metrics per version to ensure correct ordering
+transactions=()
+latencies=()
 tps=()
-for ver in {12..17}; do
-    value=$(grep "tps = " "hugosite/content/pg${ver}.md" | head -n 1 | \
-        sed -E 's/.*tps = ([0-9.]+).*/\1/')
-    tps+=("$value")
+for ver in {12..18}; do
+    tx=$(sed -nE 's/.*number of transactions actually processed: ([0-9]+).*/\1/p' "hugosite/content/pg${ver}.md" | head -n 1)
+    lt=$(sed -nE 's/.*latency average = ([0-9.]+).*/\1/p' "hugosite/content/pg${ver}.md" | head -n 1)
+    tp=$(sed -nE 's/.*tps = ([0-9.]+).*/\1/p' "hugosite/content/pg${ver}.md" | head -n 1)
+    transactions+=("${tx}")
+    latencies+=("${lt}")
+    tps+=("${tp}")
 done
 
 # Generate data rows
-for i in {12..17}; do
+for i in {12..18}; do
     idx=$((i-12))
     echo "| PG$i | ${transactions[$idx]} | ${latencies[$idx]} | ${tps[$idx]} |" >> hugosite/content/mix.md
 done
@@ -51,7 +48,7 @@ cat << EOF >> hugosite/content/mix.md
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('performanceChart');
     const data = {
-        labels: ['PG12', 'PG13', 'PG14', 'PG15', 'PG16', 'PG17'],
+        labels: ['PG12', 'PG13', 'PG14', 'PG15', 'PG16', 'PG17', 'PG18'],
         datasets: [
             {
                 label: 'Transactions Processed',

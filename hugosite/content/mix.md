@@ -21,12 +21,13 @@ draft = false
 | PG15 | 147527 | 6.506 | 2458.638847 |
 | PG16 | 178045 | 5.390 | 2967.223055 |
 | PG17 | 168357 | 5.701 | 2805.833792 |
+| PG18 | 183431 | 5.232 | 3057.004702 |
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('performanceChart');
     const data = {
-        labels: ['PG12', 'PG13', 'PG14', 'PG15', 'PG16', 'PG17'],
+        labels: ['PG12', 'PG13', 'PG14', 'PG15', 'PG16', 'PG17', 'PG18'],
         datasets: [
             {
                 label: 'Transactions Processed',
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             {
                 label: 'TPS',
-                data: [2763.556285,2425.190199,2646.418605,2458.638847,2967.223055,2805.833792],
+                data: [2763.556285,2425.190199,2646.418605,2458.638847,2967.223055,2805.833792,3057.004702],
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
                 yAxisID: 'y2'
