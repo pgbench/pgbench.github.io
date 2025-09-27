@@ -19,37 +19,31 @@ jobs:
     with:
       pg_version: '12'
   pg13:
-    needs: pg12
     uses: ./.github/workflows/pg-benchmark.yml
     with:
       pg_version: '13'
   pg14:
-    needs: pg13
     uses: ./.github/workflows/pg-benchmark.yml
     with:
       pg_version: '14'
   pg15:
-    needs: pg14
     uses: ./.github/workflows/pg-benchmark.yml
     with:
       pg_version: '15'
   pg16:
-    needs: pg15
     uses: ./.github/workflows/pg-benchmark.yml
     with:
       pg_version: '16'
   pg17:
-    needs: pg16
     uses: ./.github/workflows/pg-benchmark.yml
     with:
       pg_version: '17'
   pg18:
-    needs: pg17
     uses: ./.github/workflows/pg-benchmark.yml
     with:
       pg_version: '18'
   prepareMixResult:
-    needs: pg18
+    needs: [pg12, pg13, pg14, pg15, pg16, pg17, pg18]
     uses: ./.github/workflows/prepare-mix-result.yml
   deploy:
     needs: prepareMixResult
