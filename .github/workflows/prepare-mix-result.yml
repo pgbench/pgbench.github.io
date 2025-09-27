@@ -28,3 +28,5 @@ jobs:
       with:
         commit_message: "Update performance comparison chart"
         file_pattern: "hugosite/content/mix.md"
+        branch: main
+        push_options: "--force-with-lease"

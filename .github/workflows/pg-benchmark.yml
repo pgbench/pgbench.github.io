@@ -87,3 +87,5 @@ jobs:
         with:
           commit_message: "Update PostgreSQL ${{ env.PG_VERSION }} benchmark results"
           file_pattern: "hugosite/content/pg${{ env.PG_VERSION }}.md"
+          branch: main
+          push_options: "--force-with-lease"
