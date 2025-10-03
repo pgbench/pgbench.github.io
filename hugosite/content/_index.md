@@ -6,7 +6,7 @@ title = 'What is pgbench and how it is used'
 
 ## About PgBench Benchmarking Site
 
-This site automatically runs PostgreSQL performance benchmarks across multiple PostgreSQL versions (12-17) using [pgbench](https://www.postgresql.org/docs/current/pgbench.html), PostgreSQL's built-in benchmarking tool. Check [here](https://github.com/postgres/postgres/blob/master/src/bin/pgbench/pgbench.c) to see pgbench code.
+This site automatically runs PostgreSQL performance benchmarks across multiple PostgreSQL versions (12-18) using [pgbench](https://www.postgresql.org/docs/current/pgbench.html), PostgreSQL's built-in benchmarking tool. Check [here](https://github.com/postgres/postgres/blob/master/src/bin/pgbench/pgbench.c) to see pgbench code.
 
 ### How Our Benchmarks Work
 
