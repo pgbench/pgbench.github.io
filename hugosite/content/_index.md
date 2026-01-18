@@ -31,6 +31,7 @@ This site automatically runs PostgreSQL performance benchmarks across multiple P
    - [PostgreSQL 15](/pg15)
    - [PostgreSQL 16](/pg16)
    - [PostgreSQL 17](/pg17)
+   - [PostgreSQL 18](/pg18)
 
 ### How Results Are Shared
 
